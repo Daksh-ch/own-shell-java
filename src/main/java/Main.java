@@ -7,19 +7,21 @@ public class Main {
         
         while(true){
             System.out.print("$ ");
-
             String command = sc.nextLine();
 
-            if(command.equals("exit")){
-                break;
+            if(command.startsWith("type ")){
+                if(command.equals("exit")){
+                    break;
+                }
+                else if(command.startsWith("echo ")){
+                    System.out.println(command.substring((5)));
+                }
+                else{
+                    System.out.println(command + ": not found");
+                }
             }
+            
 
-            else if(command.startsWith("echo ")){
-                System.out.println(command.substring((5)));
-            }
-            else{
-                System.out.println(command + ": command not found");
-            }
         }
 
         sc.close();
