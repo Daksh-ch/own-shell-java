@@ -4,6 +4,18 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
+
+    private static String getPath(String parameter){
+        String[] pathList = System.getenv("PATH").split(File.pathSeparator);
+
+        for(String path : pathList ){
+            Path fullPath = Path.of(path, parameter);
+            if(Files.isRegularFile(fullPath)){
+                return fullPath.toString();
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) throws Exception {
         
         Scanner sc = new Scanner(System.in);
@@ -18,11 +30,6 @@ public class Main {
 
             String fw = command.indexOf(" ") == -1 ? command : command.substring(0,command.indexOf(' '));
             String rem = command.indexOf(" ") == -1 ? "" : command.substring(command.indexOf(' ') + 1);
-
-
-            
-
-
             
             if(fw.equals("exit")) System.exit(0);
             else if(fw.equals("type")){
@@ -30,38 +37,32 @@ public class Main {
                 System.out.println(rem + " is a shell builtin");
                 }
                 else{
-                    Boolean found = false;
-                    for(String dir : dirs){
-                        String path = dir + File.separator + rem;
-                        Path fullPath = Path.of(path);
-                        if(Files.exists(fullPath)){
-                            if(Files.isExecutable(fullPath)){
-                                found = true;
-                                System.out.println(rem + " is " + fullPath);
-                                break;
-                            }
-                        }
+                    String path = getPath(rem);
+                    if(path != null){
+                        System.out.println(rem + " is " + path);
                     }
-                    if(found == false) System.out.println(rem + ": not found");  
+                    else{
+                        System.out.println(rem + ": not found");
+                    }
                 }
             }
             else if(fw.equals("echo")){
                 System.out.println(rem);
             }
-            else if(!fw.equals("")){
-                String[] input = command.split(" ");
-                ProcessBuilder pb = new ProcessBuilder(input);
-
+            else if(getPath(fw) != null){
+                ProcessBuilder pb = new ProcessBuilder(command);
                 pb.redirectErrorStream(true);
+
                 Process process = pb.start();
 
-                //read the output of the process and also show any error messages
-                Scanner processScanner = new Scanner(process.getInputStream());
-                while(processScanner.hasNextLine()){
-                    System.out.println(processScanner.nextLine());  
-            
+                try (var reader = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
                 }
-            
+                process.waitFor();
+
             }
             else System.out.println(fw + ": command not found");
         
