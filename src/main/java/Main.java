@@ -48,7 +48,7 @@ public class Main {
             else if(fw.equals("echo")){
                 System.out.println(rem);
             }
-            else if(fw != null){
+            else if(!fw.equals("")){
                 String[] input = command.split(" ");
                 ProcessBuilder pb = new ProcessBuilder(input);
 
@@ -59,8 +59,7 @@ public class Main {
                 Scanner processScanner = new Scanner(process.getInputStream());
                 while(processScanner.hasNextLine()){
                     System.out.println(processScanner.nextLine());  
-                
-
+            
             }
             
             else System.out.println(fw + ": command not found");
