@@ -20,9 +20,6 @@ public class Main {
         
         Scanner sc = new Scanner(System.in);
 
-        String allPath = System.getenv("PATH");
-        String[] dirs = allPath.split(File.pathSeparator);
-
         
         while(true){
             System.out.print("$ ");
@@ -66,7 +63,7 @@ public class Main {
 
             }
             else System.out.println(fw + ": command not found");
-        
+            sc.close();
         }
     }
 
