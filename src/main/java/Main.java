@@ -9,18 +9,26 @@ public class Main {
             System.out.print("$ ");
             String command = sc.nextLine();
 
-            if(command.startsWith("type ")){
-                if(command.equals("exit")){
-                    break;
-                }
-                else if(command.startsWith("echo ")){
-                    System.out.println(command.substring((5)));
+            String fw = command.indexOf(" ") == -1 ? command : command.substring(command.indexOf(0,' '));
+            String rem = command.indexOf(" ") == -1 ? command : command.substring(' ' + 1);
+
+            if(fw.equals("type")){
+                if(rem.equals("type") || (rem.equals("echo")) || (rem.equals("exit"))){
+                    System.out.println(rem + " is a shell builtin");
                 }
                 else{
-                    System.out.println(command + ": not found");
+                    System.out.println(rem + " not found");
                 }
             }
-            
+            else if(fw.equals("exit")){
+                break;
+            }
+            else if(fw.equals("echo ")){
+                System.out.println(rem);
+            }
+            else{
+                System.out.println(fw + ": command not found");
+            }
 
         }
 
