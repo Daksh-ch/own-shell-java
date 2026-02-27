@@ -10,7 +10,7 @@ public class Main {
 
         for(String path : pathList ){
             Path fullPath = Path.of(path, parameter);
-            if(Files.isRegularFile(fullPath)){
+            if(Files.isRegularFile(fullPath) && Files.isExecutable(fullPath)){
                 return fullPath.toString();
             }
         }
@@ -50,7 +50,8 @@ public class Main {
                 System.out.println(rem);
             }
             else if(getPath(fw) != null){
-                ProcessBuilder pb = new ProcessBuilder(command);
+                String[] arguments = command.split(" ");
+                ProcessBuilder pb = new ProcessBuilder(arguments);
                 pb.redirectErrorStream(true);
 
                 Process process = pb.start();
