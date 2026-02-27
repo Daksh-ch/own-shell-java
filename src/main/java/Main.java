@@ -27,18 +27,20 @@ public class Main {
                     System.out.println(rem + " is a shell builtin");
                     }
                     else{
+                        Boolean found = false;
                         for(String dir : dirs){
                             String path = dir + File.separator + rem;
                             Path fullPath = Path.of(path);
                             if(Files.exists(fullPath)){
                                 if(Files.isExecutable(fullPath)){
+                                    found = true;
                                     System.out.println(rem + " is " + fullPath);
+                                    break;
                                 }
                             }
                         }
-                        System.out.println(rem + ": not found");  
+                        if(found == false) System.out.println(rem + ": not found");  
                     }
-                    // else System.out.println(rem + " not found");
                     break;
                 case "echo":
                     System.out.println(rem);
