@@ -60,16 +60,12 @@ public class Main {
                 while(processScanner.hasNextLine()){
                     System.out.println(processScanner.nextLine());  
             
+                }
+            
             }
-            
             else System.out.println(fw + ": command not found");
-            
-
-            
-            
-        }
         
+        }
     }
-
 
 }
