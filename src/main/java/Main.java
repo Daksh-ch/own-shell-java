@@ -9,8 +9,8 @@ public class Main {
             System.out.print("$ ");
             String command = sc.nextLine();
 
-            String fw = command.indexOf(" ") == -1 ? command : command.substring(command.indexOf(0,command.indexOf(' ')));
-            String rem = command.indexOf(" ") == -1 ? "" : command.substring(' ' + 1);
+            String fw = command.indexOf(" ") == -1 ? command : command.substring(0,command.indexOf(' '));
+            String rem = command.indexOf(" ") == -1 ? "" : command.substring(command.indexOf(' ') + 1);
 
             if(fw.equals("exit")) break;
             else if(fw.equals("type")){
@@ -19,7 +19,7 @@ public class Main {
                 }
                 else System.out.println(rem + " not found");  
             }
-            else if(fw.equals("echo ")){
+            else if(fw.equals("echo")){
                 System.out.println(rem);
             }
             else{
