@@ -1,5 +1,6 @@
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
@@ -20,21 +21,22 @@ public class Main {
 
             switch (fw) {
                 case "exit":
-                    break;
+                    System.exit(0);
                 case "type":
                     if(rem.equals("type") || (rem.equals("echo")) || (rem.equals("exit"))){
                     System.out.println(rem + " is a shell builtin");
                     }
                     else{
                         for(String dir : dirs){
-                            String fullPath = dir + File.separator + rem;
+                            String path = dir + File.separator + rem;
+                            Path fullPath = Path.of(path);
                             if(Files.exists(fullPath)){
                                 if(Files.isExecutable(fullPath)){
                                     System.out.println(rem + " is " + fullPath);
                                 }
                             }
-                            else System.out.println(rem + ": not found");
                         }
+                        System.out.println(rem + ": not found");  
                     }
                     // else System.out.println(rem + " not found");
                     break;
