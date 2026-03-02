@@ -70,7 +70,6 @@ public class Main {
             }
 
             else System.out.println(fw + ": command not found");
-            sc.close();
         }
     }
 }
