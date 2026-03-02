@@ -46,7 +46,7 @@ public class Main {
             else if(fw.equals("echo")){
                 System.out.println(rem);
             }
-            else if(getPath(fw) != null){
+            else if(getPath(fw) != null && !fw.equals("pwd")){
                 String[] arguments = command.split(" ");
                 ProcessBuilder pb = new ProcessBuilder(arguments);
                 pb.redirectErrorStream(true);
