@@ -46,7 +46,10 @@ public class Main {
             else if(fw.equals("echo")){
                 System.out.println(rem);
             }
-            else if(getPath(fw) != null && !fw.equals("pwd")){
+            else if(fw.equals("pwd")){
+                System.out.println(fw + " is a shell builtin");
+            }
+            else if(getPath(fw) != null){
                 String[] arguments = command.split(" ");
                 ProcessBuilder pb = new ProcessBuilder(arguments);
                 pb.redirectErrorStream(true);
@@ -63,9 +66,6 @@ public class Main {
 
             }
 
-            else if(fw.equals("pwd")){
-                System.out.println(fw + " is a shell builtin");
-            }
             else System.out.println(fw + ": command not found");
             sc.close();
         }
