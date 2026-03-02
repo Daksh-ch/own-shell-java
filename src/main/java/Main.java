@@ -62,9 +62,12 @@ public class Main {
                 process.waitFor();
 
             }
+
+            else if(fw.equals("pwd")){
+                System.out.println(System.getProperty("user.dir"));
+            }
             else System.out.println(fw + ": command not found");
             sc.close();
         }
     }
-
 }
