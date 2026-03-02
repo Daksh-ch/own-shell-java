@@ -64,7 +64,7 @@ public class Main {
             }
 
             else if(fw.equals("pwd")){
-                System.out.println(System.getProperty("user.dir"));
+                System.out.println(fw + " is a shell builtin");
             }
             else System.out.println(fw + ": command not found");
             sc.close();
