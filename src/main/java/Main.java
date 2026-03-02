@@ -30,7 +30,10 @@ public class Main {
             
             if(fw.equals("exit")) System.exit(0);
             else if(fw.equals("type")){
-                if(rem.equals("type") || (rem.equals("echo")) || (rem.equals("exit"))){
+                if(rem.equals("type") 
+                    || (rem.equals("echo"))
+                    || (rem.equals("exit"))
+                    || (rem.equals("pwd"))){
                 System.out.println(rem + " is a shell builtin");
                 }
                 else{
@@ -47,7 +50,7 @@ public class Main {
                 System.out.println(rem);
             }
             else if(fw.equals("pwd")){
-                System.out.println(fw + " is a shell builtin");
+                System.out.println(System.getProperty("user.dir"));
             }
             else if(getPath(fw) != null){
                 String[] arguments = command.split(" ");
